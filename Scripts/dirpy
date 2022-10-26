@@ -1,0 +1,10 @@
+#!C:\Users\34717\venv\Scripts\python.exe
+
+import sys
+from dirpy import application, uwsgi_prep, dirpy_main
+
+if sys.argv and sys.argv[0] == "uwsgi":
+    uwsgi_prep()
+
+elif __name__ == '__main__':
+    dirpy_main()
