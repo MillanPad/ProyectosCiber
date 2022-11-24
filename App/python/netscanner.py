@@ -38,8 +38,8 @@ print("=" * 60)
 print("Puertos Abiertos:"+Style.RESET_ALL)
     
 #Funcion que se encarga de escanear los puertos
-def escaneo_de_puertos(remoteServerIP,startPort,endPort,principial_ports):
-    try:
+
+try:
         #En caso de no haberse introducido porque puertos empezar y acabar, se usan los del archivo ports.txt
         if not startPort and not endPort:
             for port in principial_ports:  
@@ -65,21 +65,18 @@ def escaneo_de_puertos(remoteServerIP,startPort,endPort,principial_ports):
                 sock.close()
 
     #En caso de que se presione Crtl+C que se muestre este mensaje
-    except KeyboardInterrupt:
+except KeyboardInterrupt:
         print(Fore.RED+"Se presiono Ctrl+C"+Style.RESET_ALL)
         sys.exit()
     #En caso de que no se resuelva el nombre del host  
-    except socket.gaierror:
+except socket.gaierror:
         print(Fore.RED+"Error - No se pudo resolver el nombre de host."+Style.RESET_ALL)
         sys.exit()
     #En caso de que no se pueda conectar al servidor  
-    except socket.error:
+except socket.error:
         print(Fore.RED+"Error - No se pudo conectar al servidor"+Style.RESET_ALL)
         sys.exit()
-#Hacemos uso de thread para optimizar el tiempo de ejecucion
-t1 = threading.Thread(target=escaneo_de_puertos(remoteServerIP,startPort,endPort,principial_ports))
-t1.start()
-t1.join()  
+  
 #Paramos el cronometro 
 endTime = datetime.datetime.now()
 #Calculamos el tiempo que ha tardado en horas, minutos y segundos
