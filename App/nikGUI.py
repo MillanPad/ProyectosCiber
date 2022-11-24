@@ -234,18 +234,29 @@ class App:
     def GButton_797_command(self):
         target = self.target.get()
         filtro = " -h "+target
-        index = self.formatoEntry.curselection()
-        if self.authVar.get() is not None: filtro = filtro + " -id "+ self.authVar.get()
-        if self.conf.get() is not None: filtro = filtro + " -config "+ self.conf.get()
-        if index[0] is not None: filtro = filtro + " -Format "+ self.formatoEntry.get(index[0])
-        if self.fichero.get() is not None: filtro = filtro + " -output App/nikto_output/"+self.fichero.get()
-        if self.outputdes is True: filtro = filtro + " -Display on"
-        if self.sslen is True: filtro = filtro + " -nossl"
-        if self.no404 is True: filtro = filtro + " -no404"
-        if self.puerto.get() is not None: filtro = filtro + " -port "+str(self.puerto.get())
-        if self.timeout.get() is not None:filtro = filtro + " -timeout "+str(self.timeout.get())
+        #index = self.formatoEntry.curselection()
+        #puerto = str(self.puerto.get())
+        if self.authVar.get() is not None: 
+            filtro = filtro + " -id "+ self.authVar.get()
+        if self.conf.get() is not None: 
+            filtro = filtro + " -config "+ self.conf.get()
+        if self.formatoEntry.curselection() is not None: 
+            index = self.formatoEntry.curselection()
+            filtro = filtro + " -Format "+ self.formatoEntry.get(index[0])
+        if self.fichero.get() is not None: 
+            filtro = filtro + " -output App/nikto_output/"+self.fichero.get()
+        if self.outputdes is True: 
+            filtro = filtro + " -Display on"
+        if self.sslen is True: 
+            filtro = filtro + " -nossl"
+        if self.no404 is True: 
+            filtro = filtro + " -no404"
+        if self.puerto.get() != "":
+            puerto = str(self.puerto.get()) 
+            filtro = filtro + " -port "+ puerto
+        if self.timeout.get() != "":filtro = filtro + " -timeout "+str(self.timeout.get())
         #print("perl App/nikto/program/nikto.pl "+ filtro)
-        os.system("perl App/nikto/program/nikto.pl "+ filtro)
+        os.system("perl App/nikto/program/nikto.pl "+ filtro + "-C all")
 
     def outputDis_command(self):
         self.outputdes = True
