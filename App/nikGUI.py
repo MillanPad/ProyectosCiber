@@ -81,6 +81,7 @@ class App:
         confEntry["textvariable"] = self.conf
         confEntry.place(x=850,y=80,width=128,height=30)
 
+        self.outputdes=False
         outputDis = tk.Checkbutton(root)
         ft = tkFont.Font(family='Times',size=10)
         outputDis["font"] = ft
@@ -102,18 +103,18 @@ class App:
         listaLab["text"] = "Selecciona el formato del fichero !opcional!:"
         listaLab.place(x=360,y=120,width=346,height=33)
 
-        vlista = ('csv','html','txt','xml')
-        lista = tk.Variable(root,value=vlista)
-        formatoEntry = tk.Listbox(root)
+        vlista = ('csv','html','txt','xml','json','csv','sql','nbe')
+        lista = tk.Variable(value=vlista)
+        self.formatoEntry = tk.Listbox(root)
         ft = tkFont.Font(family='Times',size=10)
-        formatoEntry["font"] = ft
-        formatoEntry["bg"] = "#856ff8"
-        formatoEntry["fg"] = "black"
-        formatoEntry["justify"] = "center"
-        formatoEntry["listvariable"] = lista
-        formatoEntry["selectmode"] = tk.EXTENDED
-        formatoEntry.place(x=700,y=120,width=100,height=65)
-        self.currentformat = formatoEntry.curselection()
+        self.formatoEntry["font"] = ft
+        self.formatoEntry["bg"] = "#856ff8"
+        self.formatoEntry["fg"] = "black"
+        self.formatoEntry["justify"] = "center"
+        self.formatoEntry["listvariable"] = lista
+        self.formatoEntry["selectmode"] = tk.EXTENDED
+        self.formatoEntry.place(x=700,y=120,width=100,height=65)
+        
 
         authLab = tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
@@ -152,7 +153,8 @@ class App:
         fichEntry["justify"] = "center"
         fichEntry["textvariable"] = self.fichero
         fichEntry.place(x=360,y=200,width=128,height=30)
-
+        
+        self.sslen = False
         sslDis = tk.Checkbutton(root)
         ft = tkFont.Font(family='Times',size=10)
         sslDis["font"] = ft
@@ -165,6 +167,7 @@ class App:
         sslDis["onvalue"] = "1"
         sslDis["command"] = self.sslDis_command
 
+        self.no404 = False
         no404Dis = tk.Checkbutton(root)
         ft = tkFont.Font(family='Times',size=10)
         no404Dis["font"] = ft
@@ -230,14 +233,26 @@ class App:
 
     def GButton_797_command(self):
         target = self.target.get()
-        os.system("perl nikto/program/nikto.pl -h")
+        filtro = " -h "+target
+        index = self.formatoEntry.curselection()
+        if self.authVar.get() is not None: filtro = filtro + " -id "+ self.authVar.get()
+        if self.conf.get() is not None: filtro = filtro + " -config "+ self.conf.get()
+        if index[0] is not None: filtro = filtro + " -Format "+ self.formatoEntry.get(index[0])
+        if self.fichero.get() is not None: filtro = filtro + " -output App/nikto_output/"+self.fichero.get()
+        if self.outputdes is True: filtro = filtro + " -Display on"
+        if self.sslen is True: filtro = filtro + " -nossl"
+        if self.no404 is True: filtro = filtro + " -no404"
+        if self.puerto.get() is not None: filtro = filtro + " -port "+str(self.puerto.get())
+        if self.timeout.get() is not None:filtro = filtro + " -timeout "+str(self.timeout.get())
+        #print("perl App/nikto/program/nikto.pl "+ filtro)
+        os.system("perl App/nikto/program/nikto.pl "+ filtro)
 
     def outputDis_command(self):
-        print("Hola")
+        self.outputdes = True
     def sslDis_command(self):
-        print("Hola")
+        self.sslen = True
     def no404Dis_command(self):
-        print("Hola")
+        self.no404 = True
 
 if __name__ == "__main__":
     root = tk.Tk()
