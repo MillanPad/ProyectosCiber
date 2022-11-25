@@ -137,24 +137,37 @@ class App:
         root.destroy()
         arp = tk.Tk()
         app = arpGUI.App(arp)
-        arpGUI.mainloop()
+        arp.mainloop()
         
 
 
     def GButton_317_command(self):
-        print("command")
+        import sqlGUI
+        root.destroy()
+        sql = tk.Tk()
+        app = sqlGUI.App(sql)
+        sql.mainloop()
 
 
     def GButton_310_command(self):
         print("command")
 
 
+
     def GButton_37_command(self):
-        print("command")
+        import dosGUI
+        root.destroy()
+        dos = tk.Tk()
+        app = dosGUI.App(dos)
+        dos.mainloop()
 
 
     def GButton_93_command(self):
-        print("command")
+        import nikGUI
+        root.destroy()
+        nik = tk.Tk()
+        app = nikGUI.App(nik)
+        nik.mainloop()
 
 
     def GButton_429_command(self):
