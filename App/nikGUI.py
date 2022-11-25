@@ -36,7 +36,7 @@ class App:
         GLabel_950=tk.Label(root)
         ft = tkFont.Font(family='Times New Roman',size=20)
         GLabel_950["font"] = ft
-        GLabel_950["fg"] = "#856ff8"
+        GLabel_950["fg"] = "white"
         GLabel_950["bg"] = "black"
         GLabel_950["justify"] = "center"
         GLabel_950["text"] = "Escaneo de Vulnerabilidades"
@@ -48,7 +48,7 @@ class App:
         ft = tkFont.Font(family='Times',size=10)
         GLineEdit_132["font"] = ft
         GLineEdit_132["fg"] = "black"
-        GLineEdit_132["bg"] = "#856ff8"
+        GLineEdit_132["bg"] = "white"
         GLineEdit_132["justify"] = "center"
         GLineEdit_132["textvariable"] = self.target
         GLineEdit_132.place(x=330,y=80,width=128,height=30)
@@ -56,7 +56,7 @@ class App:
         GLabel_981=tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         GLabel_981["font"] = ft
-        GLabel_981["fg"] = "#856ff8"
+        GLabel_981["fg"] = "white"
         GLabel_981["bg"] = "black"
         GLabel_981["justify"] = "center"
         GLabel_981["text"] = "Introduzca la URL que desea escanear:"
@@ -65,7 +65,7 @@ class App:
         confileLab = tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         confileLab["font"] = ft
-        confileLab["fg"] = "#856ff8"
+        confileLab["fg"] = "white"
         confileLab["bg"] = "black"
         confileLab["justify"] = "center"
         confileLab["text"] = "Introduzca el archivo de configuracion que desea usar !opcional!:"
@@ -76,7 +76,7 @@ class App:
         ft = tkFont.Font(family='Times',size=10)
         confEntry["font"] = ft
         confEntry["fg"] = "black"
-        confEntry["bg"] = "#856ff8"
+        confEntry["bg"] = "white"
         confEntry["justify"] = "center"
         confEntry["textvariable"] = self.conf
         confEntry.place(x=850,y=80,width=128,height=30)
@@ -85,7 +85,7 @@ class App:
         outputDis = tk.Checkbutton(root)
         ft = tkFont.Font(family='Times',size=10)
         outputDis["font"] = ft
-        outputDis["fg"] = "#856ff8"
+        outputDis["fg"] = "grey"
         outputDis["bg"] = "black"
         outputDis["justify"] = "center"
         outputDis["text"] = "Desplegar output (por terminal) !opcional!"
@@ -97,7 +97,7 @@ class App:
         listaLab = tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         listaLab["font"] = ft
-        listaLab["fg"] = "#856ff8"
+        listaLab["fg"] = "white"
         listaLab["bg"] = "black"
         listaLab["justify"] = "center"
         listaLab["text"] = "Selecciona el formato del fichero !opcional!:"
@@ -108,7 +108,7 @@ class App:
         self.formatoEntry = tk.Listbox(root)
         ft = tkFont.Font(family='Times',size=10)
         self.formatoEntry["font"] = ft
-        self.formatoEntry["bg"] = "#856ff8"
+        self.formatoEntry["bg"] = "white"
         self.formatoEntry["fg"] = "black"
         self.formatoEntry["justify"] = "center"
         self.formatoEntry["listvariable"] = lista
@@ -119,7 +119,7 @@ class App:
         authLab = tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         authLab["font"] = ft
-        authLab["fg"] = "#856ff8"
+        authLab["fg"] = "white"
         authLab["bg"] = "black"
         authLab["justify"] = "center"
         authLab["text"] = "Introduzca la autenticacion a usar (id:pass) !opcional!:"
@@ -130,7 +130,7 @@ class App:
         ft = tkFont.Font(family='Times',size=10)
         authEntry["font"] = ft
         authEntry["fg"] = "black"
-        authEntry["bg"] = "#856ff8"
+        authEntry["bg"] = "white"
         authEntry["justify"] = "center"
         authEntry["textvariable"] = self.authVar
         authEntry.place(x=360,y=160,width=128,height=30)
@@ -138,7 +138,7 @@ class App:
         fichLab = tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         fichLab["font"] = ft
-        fichLab["fg"] = "#856ff8"
+        fichLab["fg"] = "white"
         fichLab["bg"] = "black"
         fichLab["justify"] = "center"
         fichLab["text"] = "Introduzca el nombre del archivo del output !opcional!:"
@@ -149,7 +149,7 @@ class App:
         ft = tkFont.Font(family='Times',size=10)
         fichEntry["font"] = ft
         fichEntry["fg"] = "black"
-        fichEntry["bg"] = "#856ff8"
+        fichEntry["bg"] = "white"
         fichEntry["justify"] = "center"
         fichEntry["textvariable"] = self.fichero
         fichEntry.place(x=360,y=200,width=128,height=30)
@@ -158,7 +158,7 @@ class App:
         sslDis = tk.Checkbutton(root)
         ft = tkFont.Font(family='Times',size=10)
         sslDis["font"] = ft
-        sslDis["fg"] = "#856ff8"
+        sslDis["fg"] = "grey"
         sslDis["bg"] = "black"
         sslDis["justify"] = "center"
         sslDis["text"] = "Deshabilita el uso de SSL !opcional!"
@@ -171,7 +171,7 @@ class App:
         no404Dis = tk.Checkbutton(root)
         ft = tkFont.Font(family='Times',size=10)
         no404Dis["font"] = ft
-        no404Dis["fg"] = "#856ff8"
+        no404Dis["fg"] = "grey"
         no404Dis["bg"] = "black"
         no404Dis["justify"] = "center"
         no404Dis["text"] = "Deshabilita 404 checks !opcional!"
@@ -183,7 +183,7 @@ class App:
         portLab = tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         portLab["font"] = ft
-        portLab["fg"] = "#856ff8"
+        portLab["fg"] = "white"
         portLab["bg"] = "black"
         portLab["justify"] = "center"
         portLab["text"] = "Introduzca el puerto a usar !opcional!:"
@@ -195,7 +195,7 @@ class App:
         ft = tkFont.Font(family='Times',size=10)
         GLineEdit_334["font"] = ft
         GLineEdit_334["fg"] = "black"
-        GLineEdit_334["bg"] = "#856ff8"
+        GLineEdit_334["bg"] = "white"
         GLineEdit_334["justify"] = "center"
         GLineEdit_334["textvariable"] = self.puerto
         GLineEdit_334.place(x=310,y=240,width=85,height=30)
@@ -203,7 +203,7 @@ class App:
         portLab = tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         portLab["font"] = ft
-        portLab["fg"] = "#856ff8"
+        portLab["fg"] = "white"
         portLab["bg"] = "black"
         portLab["justify"] = "center"
         portLab["text"] = "Introduzca el limite de tiempo en segundos para las request !opcional!:"
@@ -215,13 +215,13 @@ class App:
         ft = tkFont.Font(family='Times',size=10)
         GLineEdit_335["font"] = ft
         GLineEdit_335["fg"] = "black"
-        GLineEdit_335["bg"] = "#856ff8"
+        GLineEdit_335["bg"] = "white"
         GLineEdit_335["justify"] = "center"
         GLineEdit_335["textvariable"] = self.timeout
         GLineEdit_335.place(x=800,y=240,width=85,height=30)
 
         GButton_797=tk.Button(root)
-        GButton_797["bg"] = "#856ff8"
+        GButton_797["bg"] = "white"
         ft = tkFont.Font(family='Times',size=10)
         GButton_797["font"] = ft
         GButton_797["fg"] = "#000000"

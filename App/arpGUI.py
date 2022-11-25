@@ -41,7 +41,7 @@ class App:
         GLabel_950=tk.Label(root)
         ft = tkFont.Font(family='Times New Roman',size=20)
         GLabel_950["font"] = ft
-        GLabel_950["fg"] = "#856ff8"
+        GLabel_950["fg"] = "white"
         GLabel_950["bg"] = "black"
         GLabel_950["justify"] = "center"
         GLabel_950["text"] = "ARP Attack"
@@ -53,7 +53,7 @@ class App:
         ft = tkFont.Font(family='Times',size=10)
         GLineEdit_132["font"] = ft
         GLineEdit_132["fg"] = "black"
-        GLineEdit_132["bg"] = "#856ff8"
+        GLineEdit_132["bg"] = "white"
         GLineEdit_132["justify"] = "center"
         GLineEdit_132["textvariable"] = self.targetip
         GLineEdit_132.place(x=330,y=80,width=128,height=30)
@@ -61,7 +61,7 @@ class App:
         GLabel_981=tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         GLabel_981["font"] = ft
-        GLabel_981["fg"] = "#856ff8"
+        GLabel_981["fg"] = "white"
         GLabel_981["bg"] = "black"
         GLabel_981["justify"] = "center"
         GLabel_981["text"] = "Introduzca la direccion IP:"
@@ -74,7 +74,7 @@ class App:
         archivoL=tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         archivoL["font"] = ft
-        archivoL["fg"] = "#856ff8"
+        archivoL["fg"] = "white"
         archivoL["bg"] = "black"
         archivoL["justify"] = "center"
         archivoL["text"] = "Introduzca el nombre del archivo del output:"
@@ -86,13 +86,13 @@ class App:
         ft = tkFont.Font(family='Times',size=10)
         GLineEdit_335["font"] = ft
         GLineEdit_335["fg"] = "black"
-        GLineEdit_335["bg"] = "#856ff8"
+        GLineEdit_335["bg"] = "white"
         GLineEdit_335["justify"] = "center"
         GLineEdit_335["textvariable"] = self.output
         GLineEdit_335.place(x=356,y=150,width=125,height=30)
                 
         GButton_797=tk.Button(root)
-        GButton_797["bg"] = "#856ff8"
+        GButton_797["bg"] = "white"
         ft = tkFont.Font(family='Times',size=10)
         GButton_797["font"] = ft
         GButton_797["fg"] = "#000000"
@@ -102,7 +102,7 @@ class App:
         GButton_797["command"] = self.GButton_797_command
 
         GButton_798=tk.Button(root)
-        GButton_798["bg"] = "#856ff8"
+        GButton_798["bg"] = "white"
         ft = tkFont.Font(family='Times',size=10)
         GButton_798["font"] = ft
         GButton_798["fg"] = "#000000"

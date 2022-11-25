@@ -18,7 +18,7 @@ class App:
         GLabel_105=tk.Label(root)
         ft = tkFont.Font(family='Times New Roman',size=25)
         GLabel_105["font"] = ft
-        GLabel_105["fg"] = "#856ff8"
+        GLabel_105["fg"] = "white"
         GLabel_105["bg"] = "black"
         GLabel_105["justify"] = "center"
         GLabel_105["text"] = "Menu de Proyectos"
@@ -27,7 +27,7 @@ class App:
         encabezado1=tk.Label(root)
         ft = tkFont.Font(family="Times New Roman",size=15)
         encabezado1["font"] = ft
-        encabezado1["fg"] = "#856ff8"
+        encabezado1["fg"] = "white"
         encabezado1["bg"] = "black"
         encabezado1["justify"] = "center"
         encabezado1["text"] = "Posibles ataques a realizar:"
@@ -35,7 +35,7 @@ class App:
 
         GButton_302=tk.Button(root)
         GButton_302["anchor"] = "center"
-        GButton_302["bg"] = "#856ff8"
+        GButton_302["bg"] = "white"
         ft = tkFont.Font(family='Times',size=10)
         GButton_302["font"] = ft
         GButton_302["fg"] = "#000000"
@@ -45,7 +45,7 @@ class App:
         GButton_302["command"] = self.GButton_302_command
 
         GButton_317=tk.Button(root)
-        GButton_317["bg"] = "#856ff8"
+        GButton_317["bg"] = "white"
         ft = tkFont.Font(family='Times',size=10)
         GButton_317["font"] = ft
         GButton_317["fg"] = "#000000"
@@ -55,7 +55,7 @@ class App:
         GButton_317["command"] = self.GButton_317_command
 
         GButton_310=tk.Button(root)
-        GButton_310["bg"] = "#856ff8"
+        GButton_310["bg"] = "white"
         ft = tkFont.Font(family='Times',size=10)
         GButton_310["font"] = ft
         GButton_310["fg"] = "#000000"
@@ -65,7 +65,7 @@ class App:
         GButton_310["command"] = self.GButton_310_command
 
         GButton_37=tk.Button(root)
-        GButton_37["bg"] = "#856ff8"
+        GButton_37["bg"] = "white"
         ft = tkFont.Font(family='Times',size=10)
         GButton_37["font"] = ft
         GButton_37["fg"] = "#000000"
@@ -77,14 +77,14 @@ class App:
         encabezado2=tk.Label(root)
         ft = tkFont.Font(family="Times New Roman",size=15)
         encabezado2["font"] = ft
-        encabezado2["fg"] = "#856ff8"
+        encabezado2["fg"] = "white"
         encabezado2["bg"] = "black"
         encabezado2["justify"] = "center"
         encabezado2["text"] = "Posibles escaneos a realizar:"
         encabezado2.place(x=80,y=150,width=412,height=37)
 
         GButton_93=tk.Button(root)
-        GButton_93["bg"] = "#856ff8"
+        GButton_93["bg"] = "white"
         ft = tkFont.Font(family='Times',size=10)
         GButton_93["font"] = ft
         GButton_93["fg"] = "#000000"
@@ -94,7 +94,7 @@ class App:
         GButton_93["command"] = self.GButton_93_command
 
         GButton_429=tk.Button(root)
-        GButton_429["bg"] = "#856ff8"
+        GButton_429["bg"] = "white"
         ft = tkFont.Font(family='Times',size=10)
         GButton_429["font"] = ft
         GButton_429["fg"] = "#000000"
@@ -106,14 +106,14 @@ class App:
         encabezado3=tk.Label(root)
         ft = tkFont.Font(family="Times New Roman",size=15)
         encabezado3["font"] = ft
-        encabezado3["fg"] = "#856ff8"
+        encabezado3["fg"] = "white"
         encabezado3["bg"] = "black"
         encabezado3["justify"] = "center"
         encabezado3["text"] = "Posible sniff de red:"
         encabezado3.place(x=80,y=250,width=412,height=37)
 
         GButton_989=tk.Button(root)
-        GButton_989["bg"] = "#856ff8"
+        GButton_989["bg"] = "white"
         ft = tkFont.Font(family='Times',size=10)
         GButton_989["font"] = ft
         GButton_989["fg"] = "#000000"
@@ -123,7 +123,7 @@ class App:
         GButton_989["command"] = self.GButton_989_command
 
         GButton_917=tk.Button(root)
-        GButton_917["bg"] = "#856ff8"
+        GButton_917["bg"] = "white"
         ft = tkFont.Font(family='Times',size=10)
         GButton_917["font"] = ft
         GButton_917["fg"] = "#000000"
@@ -150,7 +150,11 @@ class App:
 
 
     def GButton_310_command(self):
-        print("command")
+        import xssGUI
+        root.destroy()
+        xss = tk.Tk()
+        app = xssGUI.App(xss)
+        xss.mainloop()
 
 
 

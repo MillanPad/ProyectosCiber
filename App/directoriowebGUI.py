@@ -38,7 +38,7 @@ class App:
         GLabel_950=tk.Label(root)
         ft = tkFont.Font(family='Times New Roman',size=20)
         GLabel_950["font"] = ft
-        GLabel_950["fg"] = "#856ff8"
+        GLabel_950["fg"] = "white"
         GLabel_950["bg"] = "black"
         GLabel_950["justify"] = "center"
         GLabel_950["text"] = "Escaneo de Directorio Web"
@@ -50,7 +50,7 @@ class App:
         ft = tkFont.Font(family='Times',size=10)
         GLineEdit_132["font"] = ft
         GLineEdit_132["fg"] = "black"
-        GLineEdit_132["bg"] = "#856ff8"
+        GLineEdit_132["bg"] = "white"
         GLineEdit_132["justify"] = "center"
         GLineEdit_132["textvariable"] = self.targetip
         GLineEdit_132.place(x=330,y=80,width=128,height=30)
@@ -58,7 +58,7 @@ class App:
         GLabel_981=tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         GLabel_981["font"] = ft
-        GLabel_981["fg"] = "#856ff8"
+        GLabel_981["fg"] = "white"
         GLabel_981["bg"] = "black"
         GLabel_981["justify"] = "center"
         GLabel_981["text"] = "Introduzca el nombre del host o la direccion IP:"
@@ -67,7 +67,7 @@ class App:
         GLabel_622=tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         GLabel_622["font"] = ft
-        GLabel_622["fg"] = "#856ff8"
+        GLabel_622["fg"] = "white"
         GLabel_622["bg"] = "black"
         GLabel_622["justify"] = "center"
         GLabel_622["text"] = "Introduzca el nombre de la wordlist que desea usar"
@@ -76,7 +76,7 @@ class App:
         segundafrase=tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         segundafrase["font"] = ft
-        segundafrase["fg"] = "#856ff8"
+        segundafrase["fg"] = "white"
         segundafrase["bg"] = "black"
         segundafrase["justify"] = "center"
         segundafrase["text"] = "(Por defecto se usara el comun.txt en la carpeta wordlists):"
@@ -88,13 +88,13 @@ class App:
         ft = tkFont.Font(family='Times',size=10)
         GLineEdit_334["font"] = ft
         GLineEdit_334["fg"] = "black"
-        GLineEdit_334["bg"] = "#856ff8"
+        GLineEdit_334["bg"] = "white"
         GLineEdit_334["justify"] = "center"
         GLineEdit_334["textvariable"] = self.wordlists
         GLineEdit_334.place(x=356,y=130,width=125,height=30)
                 
         GButton_797=tk.Button(root)
-        GButton_797["bg"] = "#856ff8"
+        GButton_797["bg"] = "white"
         ft = tkFont.Font(family='Times',size=10)
         GButton_797["font"] = ft
         GButton_797["fg"] = "#000000"

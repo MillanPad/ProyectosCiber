@@ -35,7 +35,7 @@ class App:
         GLabel_950=tk.Label(root)
         ft = tkFont.Font(family='Times New Roman',size=20)
         GLabel_950["font"] = ft
-        GLabel_950["fg"] = "#856ff8"
+        GLabel_950["fg"] = "white"
         GLabel_950["bg"] = "black"
         GLabel_950["justify"] = "center"
         GLabel_950["text"] = "DoS"
@@ -47,7 +47,7 @@ class App:
         ft = tkFont.Font(family='Times',size=10)
         GLineEdit_132["font"] = ft
         GLineEdit_132["fg"] = "black"
-        GLineEdit_132["bg"] = "#856ff8"
+        GLineEdit_132["bg"] = "white"
         GLineEdit_132["justify"] = "center"
         GLineEdit_132["textvariable"] = self.targetip
         GLineEdit_132.place(x=330,y=80,width=128,height=30)
@@ -55,7 +55,7 @@ class App:
         GLabel_981=tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         GLabel_981["font"] = ft
-        GLabel_981["fg"] = "#856ff8"
+        GLabel_981["fg"] = "white"
         GLabel_981["bg"] = "black"
         GLabel_981["justify"] = "center"
         GLabel_981["text"] = "Introduzca el nombre del host o la direccion IP:"
@@ -64,7 +64,7 @@ class App:
         GLabel_622=tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         GLabel_622["font"] = ft
-        GLabel_622["fg"] = "#856ff8"
+        GLabel_622["fg"] = "white"
         GLabel_622["bg"] = "black"
         GLabel_622["justify"] = "left"
         GLabel_622["text"] = "Introduzca la ip falsa que desea usar:"
@@ -76,7 +76,7 @@ class App:
         ft = tkFont.Font(family='Times',size=10)
         GLineEdit_334["font"] = ft
         GLineEdit_334["fg"] = "black"
-        GLineEdit_334["bg"] = "#856ff8"
+        GLineEdit_334["bg"] = "white"
         GLineEdit_334["justify"] = "center"
         GLineEdit_334["textvariable"] = self.fakeip
         GLineEdit_334.place(x=320,y=120,width=128,height=30)
@@ -84,7 +84,7 @@ class App:
         GLabel_470=tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         GLabel_470["font"] = ft
-        GLabel_470["fg"] = "#856ff8"
+        GLabel_470["fg"] = "white"
         GLabel_470["bg"] = "black"
         GLabel_470["justify"] = "center"
         GLabel_470["text"] = "Introducir Puerto:"
@@ -96,14 +96,14 @@ class App:
         ft = tkFont.Font(family='Times',size=10)
         GLineEdit_430["font"] = ft
         GLineEdit_430["fg"] = "black"
-        GLineEdit_430["bg"] = "#856ff8"
+        GLineEdit_430["bg"] = "white"
         GLineEdit_430["justify"] = "center"
         GLineEdit_430["textvariable"] = self.puerto
         GLineEdit_430.place(x=220,y=160,width=87,height=30)
         
 
         GButton_797=tk.Button(root)
-        GButton_797["bg"] = "#856ff8"
+        GButton_797["bg"] = "white"
         ft = tkFont.Font(family='Times',size=10)
         GButton_797["font"] = ft
         GButton_797["fg"] = "#000000"

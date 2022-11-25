@@ -22,7 +22,8 @@ class App:
         GLabel_442=tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         GLabel_442["font"] = ft
-        GLabel_442["fg"] = "#333333"
+        GLabel_442["fg"] = "white"
+        GLabel_442["bg"] = "black"
         GLabel_442["justify"] = "center"
         GLabel_442["text"] = "Introduce la URL de la pagina web:"
         GLabel_442.place(x=0,y=20,width=216,height=30)
@@ -59,7 +60,8 @@ class App:
         GLabel_506=tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         GLabel_506["font"] = ft
-        GLabel_506["fg"] = "#333333"
+        GLabel_506["fg"] = "white"
+        GLabel_506["bg"] = "black"
         GLabel_506["justify"] = "center"
         GLabel_506["text"] = "Una vez cargadas las bases de datos puedes seleccionar la que quieres usar"
         GLabel_506.place(x=0,y=90,width=429,height=30)
@@ -85,7 +87,8 @@ class App:
         GLabel_250=tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         GLabel_250["font"] = ft
-        GLabel_250["fg"] = "#333333"
+        GLabel_250["fg"] = "white"
+        GLabel_250["bg"] = "black"
         GLabel_250["justify"] = "center"
         GLabel_250["text"] = "Una vez cargadas las tablas puedes seleccionar la que quieres usar"
         GLabel_250.place(x=0,y=290,width=379,height=34)
@@ -121,7 +124,8 @@ class App:
         GLabel_266=tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         GLabel_266["font"] = ft
-        GLabel_266["fg"] = "#333333"
+        GLabel_266["fg"] ="white"
+        GLabel_266["bg"] = "black"
         GLabel_266["justify"] = "center"
         GLabel_266["text"] = "Nombra de la carpeta donde se van a guardar todos los datos:"
         GLabel_266.place(x=340,y=20,width=374,height=30)
@@ -262,4 +266,5 @@ class App:
 if __name__ == "__main__":
     root = tk.Tk()
     app = App(root)
+    root.config(bg="black")
     root.mainloop()

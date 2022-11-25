@@ -39,7 +39,7 @@ class App:
         GLabel_950=tk.Label(root)
         ft = tkFont.Font(family='Times New Roman',size=20)
         GLabel_950["font"] = ft
-        GLabel_950["fg"] = "#856ff8"
+        GLabel_950["fg"] = "white"
         GLabel_950["bg"] = "black"
         GLabel_950["justify"] = "center"
         GLabel_950["text"] = "Ratreo de Paquetes"
@@ -51,7 +51,7 @@ class App:
         ft = tkFont.Font(family='Times',size=10)
         GLineEdit_132["font"] = ft
         GLineEdit_132["fg"] = "black"
-        GLineEdit_132["bg"] = "#856ff8"
+        GLineEdit_132["bg"] = "white"
         GLineEdit_132["justify"] = "center"
         GLineEdit_132["textvariable"] = self.filtro
         GLineEdit_132.place(x=330,y=80,width=128,height=30)
@@ -59,7 +59,7 @@ class App:
         GLabel_981=tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         GLabel_981["font"] = ft
-        GLabel_981["fg"] = "#856ff8"
+        GLabel_981["fg"] = "white"
         GLabel_981["bg"] = "black"
         GLabel_981["justify"] = "center"
         GLabel_981["text"] = "Introduzca el filtro que desea usar:"
@@ -68,7 +68,7 @@ class App:
         GLabel_622=tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         GLabel_622["font"] = ft
-        GLabel_622["fg"] = "#856ff8"
+        GLabel_622["fg"] = "white"
         GLabel_622["bg"] = "black"
         GLabel_622["justify"] = "center"
         GLabel_622["text"] = "Introduzca el tiempo que quiere que dure el rastreo:"
@@ -80,7 +80,7 @@ class App:
         ft = tkFont.Font(family='Times',size=10)
         GLineEdit_334["font"] = ft
         GLineEdit_334["fg"] = "black"
-        GLineEdit_334["bg"] = "#856ff8"
+        GLineEdit_334["bg"] = "white"
         GLineEdit_334["justify"] = "center"
         GLineEdit_334["textvariable"] = self.duracion
         GLineEdit_334.place(x=356,y=120,width=125,height=30)
@@ -88,7 +88,7 @@ class App:
         archivoL=tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         archivoL["font"] = ft
-        archivoL["fg"] = "#856ff8"
+        archivoL["fg"] = "white"
         archivoL["bg"] = "black"
         archivoL["justify"] = "center"
         archivoL["text"] = "Introduzca el nombre del archivo del output:"
@@ -100,13 +100,13 @@ class App:
         ft = tkFont.Font(family='Times',size=10)
         GLineEdit_335["font"] = ft
         GLineEdit_335["fg"] = "black"
-        GLineEdit_335["bg"] = "#856ff8"
+        GLineEdit_335["bg"] = "white"
         GLineEdit_335["justify"] = "center"
         GLineEdit_335["textvariable"] = self.output
         GLineEdit_335.place(x=356,y=170,width=125,height=30)
                 
         GButton_797=tk.Button(root)
-        GButton_797["bg"] = "#856ff8"
+        GButton_797["bg"] = "white"
         ft = tkFont.Font(family='Times',size=10)
         GButton_797["font"] = ft
         GButton_797["fg"] = "#000000"
