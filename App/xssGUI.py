@@ -125,6 +125,7 @@ class App:
         canvas.create_window((0,0), window=self.scrollable_frame)
 
         canvas.configure(yscrollcommand=scrollbar.set,bg="black")
+        
         container.place(x=0,y=270,width=600,height=230)
         canvas.pack(side="left", fill="both", expand=True)
         scrollbar.pack(side="right", fill="y")
@@ -133,22 +134,25 @@ class App:
         url = self.target.get()
         filtro = "-u " + url
         line1 =""
-        os.remove("App/PwnXSS/xss.txt")
+        os.system("rm xss.txt")
         if self.GListBox_146.curselection() is not None:
             index = self.GListBox_146.curselection()
             filtro = filtro + " --method "+str(index[0])
         if self.payload.get() != "":
-            filtro = filtro + " --payload '"+ self.payload.get()+ "'"
+            filtro = filtro + " --payload "+ self.payload.get()+ ""
         os.system("python App/PwnXSS/pwnxss.py "+filtro)
         
-        
-        with open('App/PwnXSS/xss.txt', 'r') as f:
-            for line in f:
-                line1 = unquote(line)
-                ttk.Label(self.scrollable_frame,text=line1,foreground="green",background="black").pack()
-                
-                self.cont=self.cont+20
-        
+        cont=0
+        with open('xss.txt', 'r') as f:
+                for line in f:
+                    cont+=1
+                    if cont % 2 != 0 :
+                        line.replace('\n','')
+                        line1 = unquote(line)
+                        ttk.Label(self.scrollable_frame,text=line1,foreground="green",background="black").pack()
+                    
+                    
+            
         #self.GMessage_297["textvariable"]= line1
         #self.GMessage_297.insert(chars=line1)
         

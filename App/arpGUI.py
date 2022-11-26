@@ -129,7 +129,7 @@ class App:
             print("PAQUETES CAPTURADOS")
             capture = sniff(filter=f"ip src host {target} or ip src host {self.ip_host}",timeout=int(2))
             print(capture.summary())
-            wrpcap("App/rastreo_output/{}.cap".format(output),str(capture))
+            wrpcap("App/rastreo_output/{}.cap".format(output),capture)
             label = tk.Label(root,text=str(capture),fg="green",bg="black",justify="center")
             label.place(x=30,y=self.cont,width=530,height=20)
             self.cont=self.cont+20

@@ -178,15 +178,17 @@ class App:
 
     def listarBBDD_command(self):
         target = self.target.get()
+        web = target.split("/")
         self.lista = []
         cont=0
-        os.system("sqlmap -u "+target+"--dbs --batch --output-dir=App/sqlArchives/{}"+self.carpeta.get()+"/BaseDatos")
-        with open('App/sqlArchives/{}/BaseDatos/testphp.vulnweb.com/log'.format(self.carpeta.get()), 'r') as f:
+        os.system("sqlmap -u "+target+" --dbs --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/BaseDatos")
+        with open('App/sqlArchives/'+self.carpeta.get()+'/BaseDatos/'+web[2]+'/log', 'r') as f:
             for line in f:
                 if line[0] == "[" :
                     print(line)
                     print(tuple(line))
                     line1=line.replace(' ','')
+                    line1=line1.replace('\n','')
                     self.lista.append(line1.replace('[*]',''))
                     cont=cont+1
                 
@@ -196,15 +198,19 @@ class App:
 
     def listarTablas_command(self):
         target = self.target.get()
+        web = target.split("/")
+        print(web[2])
         self.lista = []
+        self.lastBD = self.listBBDD.get(self.listBBDD.curselection()[0])
         cont=0
-        os.system("sqlmap -u "+target+"--D "+self.listBBDD.get(self.listBBDD.curselection()[0])+" --batch --output-dir=App/sqlArchives/{}"+self.carpeta.get()+"/Tablas")
-        with open('App/sqlArchives/{}/Tablas/testphp.vulnweb.com/log'.format(self.carpeta.get()), 'r') as f:
+        os.system("sqlmap -u "+target+" -D "+self.listBBDD.get(self.listBBDD.curselection()[0])+" --tables --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/Tablas")
+        with open('App/sqlArchives/'+self.carpeta.get()+'/Tablas/'+web[2]+'/log', 'r') as f:
             for line in f:
-                if line[0] == "[" :
+                if line[0] == "|" :
                     print(line)
                     print(tuple(line))
                     line1=line.replace(' ','')
+                    line1=line1.replace('\n','')
                     self.lista.append(line1.replace('|',''))
                     cont=cont+1
         self.listTable["listvariable"] = tk.Variable(value=self.lista)
@@ -212,15 +218,17 @@ class App:
 
     def listarColumnas_command(self):
         target = self.target.get()
+        web = target.split("/")
         self.lista = []
         cont=0
-        os.system("sqlmap -u "+target+"--D "+self.listBBDD.get(self.listBBDD.curselection()[0])+" --T "+self.listTable.get(self.listTable.curselection()[0])+"--columns --batch --output-dir=App/sqlArchives/{}"+self.carpeta.get()+"/Columnas")
-        with open('App/sqlArchives/{}/Columnas/testphp.vulnweb.com/log'.format(self.carpeta.get()), 'r') as f:
+        os.system("sqlmap -u "+target+" -D "+self.lastBD+" -T "+self.listTable.get(self.listTable.curselection()[0])+" --columns --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/Columnas")
+        with open('App/sqlArchives/'+self.carpeta.get()+'/Columnas/'+web[2]+'/log', 'r') as f:
             for line in f:
-                if line[0] == "[" :
+                if line[0] == "|" :
                     print(line)
                     print(tuple(line))
                     line1=line.replace(' ','')
+                    line1=line1.replace('\n','')
                     self.lista.append(line1.replace('|',''))
                     cont=cont+1
         self.listColmn["listvariable"] = tk.Variable(value=self.lista)
@@ -229,14 +237,16 @@ class App:
     def listarPasswd_command(self):
         target = self.target.get()
         self.lista = []
+        web = target.split("/")
         cont=0
-        os.system("sqlmap -u "+target+"--passwords --batch --output-dir=App/sqlArchives/{}"+self.carpeta.get()+"/Passwd")
-        with open('App/sqlArchives/{}/Passwd/testphp.vulnweb.com/log'.format(self.carpeta.get()), 'r') as f:
+        os.system("sqlmap -u "+target+" --passwords --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/Passwd")
+        with open('App/sqlArchives/'+self.carpeta.get()+'/Passwd/'+web[2]+'/log', 'r') as f:
             for line in f:
-                if line[0] == "[" :
+                if line[0] == "|" :
                     print(line)
                     print(tuple(line))
                     line1=line.replace(' ','')
+                    line1=line1.replace('\n','')
                     self.lista.append(line1.replace('|',''))
                     cont=cont+1
                 
@@ -250,14 +260,16 @@ class App:
     def listarUser_command(self):
         target = self.target.get()
         self.lista = []
+        web = target.split("/")
         cont=0
-        os.system("sqlmap -u "+target+"--users --batch --output-dir=App/sqlArchives/{}"+self.carpeta.get()+"/User")
-        with open('App/sqlArchives/{}/User/testphp.vulnweb.com/log'.format(self.carpeta.get()), 'r') as f:
+        os.system("sqlmap -u "+target+" --users --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/User")
+        with open('App/sqlArchives/'+self.carpeta.get()+'/User/'+web[2]+'/log', 'r') as f:
             for line in f:
                 if line[0] == "[" :
                     print(line)
                     print(tuple(line))
                     line1=line.replace(' ','')
+                    line1=line1.replace('\n','')
                     self.lista.append(line1.replace('[*]',''))
                     cont=cont+1
                 

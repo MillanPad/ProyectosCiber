@@ -256,7 +256,7 @@ class App:
             filtro = filtro + " -port "+ puerto
         if self.timeout.get() != "":filtro = filtro + " -timeout "+str(self.timeout.get())
         #print("perl App/nikto/program/nikto.pl "+ filtro)
-        os.system("perl App/nikto/program/nikto.pl "+ filtro + "-C all")
+        os.system("perl App/nikto/program/nikto.pl "+ filtro + " -C all")
 
     def outputDis_command(self):
         self.outputdes = True

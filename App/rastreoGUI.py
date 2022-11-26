@@ -124,7 +124,7 @@ class App:
             capture = sniff(filter=str(filtro),timeout=int(duracion))
         else:
             capture = sniff(timeout=int(duracion))
-        wrpcap("App/rastreo_output/{}.cap".format(output),str(capture))
+        wrpcap("App/rastreo_output/{}.cap".format(output),capture)
         self.printeo(str(capture))
     def printeo(self,lista):
         label = tk.Label(root,text=lista,fg="green",bg="black",justify="center")
