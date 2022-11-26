@@ -134,13 +134,13 @@ class App:
         url = self.target.get()
         filtro = "-u " + url
         line1 =""
-        os.system("rm xss.txt")
+        os.system("sudo rm xss.txt")
         if self.GListBox_146.curselection() is not None:
             index = self.GListBox_146.curselection()
             filtro = filtro + " --method "+str(index[0])
         if self.payload.get() != "":
             filtro = filtro + " --payload "+ self.payload.get()+ ""
-        os.system("python App/PwnXSS/pwnxss.py "+filtro)
+        os.system("sudo python App/PwnXSS/pwnxss.py "+filtro)
         
         cont=0
         with open('xss.txt', 'r') as f:

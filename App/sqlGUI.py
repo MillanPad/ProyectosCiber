@@ -181,7 +181,7 @@ class App:
         web = target.split("/")
         self.lista = []
         cont=0
-        os.system("sqlmap -u "+target+" --dbs --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/BaseDatos")
+        os.system("sudo sqlmap -u "+target+" --dbs --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/BaseDatos")
         with open('App/sqlArchives/'+self.carpeta.get()+'/BaseDatos/'+web[2]+'/log', 'r') as f:
             for line in f:
                 if line[0] == "[" :
@@ -203,7 +203,7 @@ class App:
         self.lista = []
         self.lastBD = self.listBBDD.get(self.listBBDD.curselection()[0])
         cont=0
-        os.system("sqlmap -u "+target+" -D "+self.listBBDD.get(self.listBBDD.curselection()[0])+" --tables --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/Tablas")
+        os.system("sudo sqlmap -u "+target+" -D "+self.listBBDD.get(self.listBBDD.curselection()[0])+" --tables --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/Tablas")
         with open('App/sqlArchives/'+self.carpeta.get()+'/Tablas/'+web[2]+'/log', 'r') as f:
             for line in f:
                 if line[0] == "|" :
@@ -221,7 +221,7 @@ class App:
         web = target.split("/")
         self.lista = []
         cont=0
-        os.system("sqlmap -u "+target+" -D "+self.lastBD+" -T "+self.listTable.get(self.listTable.curselection()[0])+" --columns --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/Columnas")
+        os.system("sudo sqlmap -u "+target+" -D "+self.lastBD+" -T "+self.listTable.get(self.listTable.curselection()[0])+" --columns --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/Columnas")
         with open('App/sqlArchives/'+self.carpeta.get()+'/Columnas/'+web[2]+'/log', 'r') as f:
             for line in f:
                 if line[0] == "|" :
@@ -239,7 +239,7 @@ class App:
         self.lista = []
         web = target.split("/")
         cont=0
-        os.system("sqlmap -u "+target+" --passwords --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/Passwd")
+        os.system("sudo sqlmap -u "+target+" --passwords --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/Passwd")
         with open('App/sqlArchives/'+self.carpeta.get()+'/Passwd/'+web[2]+'/log', 'r') as f:
             for line in f:
                 if line[0] == "|" :
@@ -262,7 +262,7 @@ class App:
         self.lista = []
         web = target.split("/")
         cont=0
-        os.system("sqlmap -u "+target+" --users --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/User")
+        os.system("sudo sqlmap -u "+target+" --users --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/User")
         with open('App/sqlArchives/'+self.carpeta.get()+'/User/'+web[2]+'/log', 'r') as f:
             for line in f:
                 if line[0] == "[" :
