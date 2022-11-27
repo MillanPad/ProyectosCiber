@@ -121,7 +121,7 @@ class App:
         output = self.output.get()
         self.cont=280
         if filtro is None:
-            capture = sniff(filter=str(filtro),timeout=int(duracion))
+            capture = sniff(filter=filtro,timeout=int(duracion))
         else:
             capture = sniff(timeout=int(duracion))
         wrpcap("App/rastreo_output/{}.cap".format(output),capture)
