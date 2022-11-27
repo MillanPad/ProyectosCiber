@@ -137,35 +137,41 @@ class App:
 
 
     def GButton_797_command(self):
+        #Se guardan en variables la informacion que introduce el usuario
         target=self.targetip.get()
         inicio=self.puertoin.get()
         fin=self.puertofin.get()
         self.cont = 280
+        #En caso de no haberse introducido porque puertos empezar y acabar, se usan los del archivo ports.txt
         if self.control is True:
+            #Se abre el fichero con los puertos y se guarda en una lista
             ports_fich=open("App/netscanner_files/ports.txt","r")
             ports_p=ports_fich.read()
             ports_p=ports_p.split(':')
             ports_fich.close()
             principial_ports=list(map(int, ports_p))
-                
+            #La lista que se ha crado con los puertos se va probando puerto a puerto
             for port in principial_ports:  
-                
+                #Usamos thread optimizamos la ejecucion de la funcion connection
                 thread = threading.Thread(target=self.connection(target,port))
                 thread.start()
-                    
+        #En caso de que se especifique en que puerto empezar y acabar el escaneo    
         else:
             for port in range(inicio,fin+1):
-                
+                #Usamos thread optimizamos la ejecucion de la funcion connection
                 thread = threading.Thread(target=self.connection(target,port))
                 thread.start()
+        #Se printea por la ventana que el escaneo se ha completado
         label = tk.Label(root,text="Escaneo Completado",fg="yellow",bg="black",justify="center")
         label.place(x=30,y=self.cont,width=530,height=20)
     def connection(self,ip,prt):
         try:
             print("Probando con ip: {} y puerto: {}".format(ip,prt))
+            #Comprobamos mediante socket si hay respuesta/conexion desde ese puerto
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             result = sock.connect_ex((ip, prt))
             if result == 0:
+                #Si se comprueba que dicho puerto esta abierto se printea en la ventana
                 label = tk.Label(root,text=" Puerto {}:     Abierto".format(prt),fg="green",bg="black",justify="center")
                 label.place(x=30,y=self.cont,width=530,height=20)
                 self.cont=self.cont+20

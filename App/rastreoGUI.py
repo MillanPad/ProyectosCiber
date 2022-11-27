@@ -116,17 +116,21 @@ class App:
         GButton_797["command"] = self.GButton_797_command
 
     def GButton_797_command(self):
+        #Se guardan en variables los datos introducidos por el usuario
         filtro=self.filtro.get()
         duracion=self.duracion.get()
         output = self.output.get()
         self.cont=280
+        #Si hay filtro se ejecuta la funcion sniff de scapy con el filtro puesto si no se ejecuta sin filtro
         if filtro is None:
             capture = sniff(filter=filtro,timeout=int(duracion))
         else:
             capture = sniff(timeout=int(duracion))
+        #Se guarda en un archivo el contenido de los paquetes rastreados
         wrpcap("App/rastreo_output/{}.cap".format(output),capture)
         self.printeo(str(capture))
     def printeo(self,lista):
+        #Esta funcion imprime por la ventana el resumen del rastreo de paquetes
         label = tk.Label(root,text=lista,fg="green",bg="black",justify="center")
         label.place(x=30,y=self.cont,width=530,height=20)
         self.cont=self.cont+20

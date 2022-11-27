@@ -177,11 +177,16 @@ class App:
         self.listaUser.place(x=480,y=365,width=269,height=114)
 
     def listarBBDD_command(self):
+        #Funcion para listar las Bases de Datos
+        #Preprando las variables para la consulta#Funcion para listar las Tablas de una Base de Datos
+        #Preprando las variables para la consulta
         target = self.target.get()
         web = target.split("/")
         self.lista = []
         cont=0
+        #Ejecutando sqlmap para sacar las bases de datos y crear una carpeta para guardar los datos
         os.system("sudo sqlmap -u "+target+" --dbs --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/BaseDatos")
+        #Abrimos el fichero donde se ha guardado la informacion y se despliegan las bases de datos obtenidas en la checklist
         with open('App/sqlArchives/'+self.carpeta.get()+'/BaseDatos/'+web[2]+'/log', 'r') as f:
             for line in f:
                 if line[0] == "[" :
@@ -191,19 +196,25 @@ class App:
                     line1=line1.replace('\n','')
                     self.lista.append(line1.replace('[*]',''))
                     cont=cont+1
-                
+        #Se actualiza la checklist
         self.listBBDD["listvariable"] = tk.Variable(value=self.lista)
         
 
 
     def listarTablas_command(self):
+        #Funcion para listar las Tablas de una Base de Datos
+        #Preprando las variables para la consulta#Funcion para listar las Tablas de una Base de Datos
+        #Preprando las variables para la consulta
         target = self.target.get()
         web = target.split("/")
         print(web[2])
         self.lista = []
+        #Aqui para que el usuario no tenga que volver a seleccionar la base de datos esta ultima seleccionada se guarda esta variable
         self.lastBD = self.listBBDD.get(self.listBBDD.curselection()[0])
         cont=0
+        #Ejecutando sqlmap para sacar las tablas y crear una carpeta para guardar los datos
         os.system("sudo sqlmap -u "+target+" -D "+self.listBBDD.get(self.listBBDD.curselection()[0])+" --tables --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/Tablas")
+        #Abrimos el fichero donde se ha guardado la informacion y se despliegan las tablas obtenidas en la checklist
         with open('App/sqlArchives/'+self.carpeta.get()+'/Tablas/'+web[2]+'/log', 'r') as f:
             for line in f:
                 if line[0] == "|" :
@@ -213,15 +224,20 @@ class App:
                     line1=line1.replace('\n','')
                     self.lista.append(line1.replace('|',''))
                     cont=cont+1
+        #Se actualiza la checklist
         self.listTable["listvariable"] = tk.Variable(value=self.lista)
 
 
     def listarColumnas_command(self):
+        #Funcion para listar las columnas de una Tabla
+        #Preprando las variables para la consulta
         target = self.target.get()
         web = target.split("/")
         self.lista = []
         cont=0
+        #Ejecutando sqlmap para sacar las columnas y crear una carpeta para guardar los datos
         os.system("sudo sqlmap -u "+target+" -D "+self.lastBD+" -T "+self.listTable.get(self.listTable.curselection()[0])+" --columns --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/Columnas")
+        #Abrimos el fichero donde se ha guardado la informacion y se despliegan las columnas obtenidas en la checklist
         with open('App/sqlArchives/'+self.carpeta.get()+'/Columnas/'+web[2]+'/log', 'r') as f:
             for line in f:
                 if line[0] == "|" :
@@ -231,15 +247,20 @@ class App:
                     line1=line1.replace('\n','')
                     self.lista.append(line1.replace('|',''))
                     cont=cont+1
+        #Se actualiza la checklist
         self.listColmn["listvariable"] = tk.Variable(value=self.lista)
 
 
     def listarPasswd_command(self):
+        #Funcion para listar las contraseñas 
+        #Preprando las variables para la consulta
         target = self.target.get()
         self.lista = []
         web = target.split("/")
         cont=0
+        #Ejecutando sqlmap para sacar las contraseñas y crear una carpeta para guardar los datos
         os.system("sudo sqlmap -u "+target+" --passwords --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/Passwd")
+        #Abrimos el fichero donde se ha guardado la informacion y se despliegan las contraseñas obtenidas en la checklist
         with open('App/sqlArchives/'+self.carpeta.get()+'/Passwd/'+web[2]+'/log', 'r') as f:
             for line in f:
                 if line[0] == "|" :
@@ -249,20 +270,25 @@ class App:
                     line1=line1.replace('\n','')
                     self.lista.append(line1.replace('|',''))
                     cont=cont+1
-                
+        #Se actualiza la checklist        
         self.listaUser["listvariable"] = tk.Variable(value=self.lista)
     
     def crearCarpeta_command(self):
+        #Aunque se crea al ejecutarse sqlmap esta funcion permite crear la carpeta con anterioridad
         carpeta = self.carpeta.get()
         os.mkdir(path="App/sqlArchives/{}".format(carpeta))
 
 
     def listarUser_command(self):
+        #Funcion para listar los usuarios
+        #Preprando las variables para la consulta
         target = self.target.get()
         self.lista = []
         web = target.split("/")
         cont=0
+        #Ejecutando sqlmap para sacar los usuarios y crear una carpeta para guardar los datos
         os.system("sudo sqlmap -u "+target+" --users --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/User")
+        #Abrimos el fichero donde se ha guardado la informacion y se despliegan los usuarios obtenidos en la checklist
         with open('App/sqlArchives/'+self.carpeta.get()+'/User/'+web[2]+'/log', 'r') as f:
             for line in f:
                 if line[0] == "[" :
@@ -272,7 +298,7 @@ class App:
                     line1=line1.replace('\n','')
                     self.lista.append(line1.replace('[*]',''))
                     cont=cont+1
-                
+        #Se actualiza la checklist       
         self.listaUser["listvariable"] = tk.Variable(value=self.lista)
 
 if __name__ == "__main__":

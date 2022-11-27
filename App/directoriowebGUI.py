@@ -107,8 +107,6 @@ class App:
         targetip=self.targetip.get()
         wordlist=self.wordlists.get()
         self.cont=240
-        print(wordlist)
-        print(self.cont)
         try:
             #Mediante socket estableceremos conexion mediante el puerto 80 a el servidor web que hemos especificado
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -116,8 +114,7 @@ class App:
             sock.close()
             #Comprueba si ha habido conexion o no
             if estado==0:
-                
-                
+                #Imprime por pantalla la informacion especificada en text=
                 label = tk.Label(root,text="Conexion probada=OK",fg="blue",bg="black",justify="center")
                 print("hecho")
                 label.place(x=30,y=self.cont,width=530,height=20)
@@ -125,34 +122,38 @@ class App:
                 pass
             else:
                 self.cont=self.cont+20
+                #Imprime por pantalla la informacion especificada en text=
                 label = tk.Label(root,text= "Error - No se pudo conectar al host.",fg="red",bg="black",justify="center")
-                label.place(x=30,y=self.cont,width=530,height=20)
-                ##sys.exit()
+                label.place(x=30,y=self.cont,width=530,height=20)    
             try:
+                #Abrimos el archivo con la wordlist
                 with open("App/wordlists/{}.txt".format(wordlist)) as file:
                     lista=file.read().strip().split('\n')
+                #Mediante threading optimizamos la ejecucion de la funcion enumeracion
                 t1 = threading.Thread(target=self.enumeracion(lista,targetip))
                 t1.start()
                 t1.join()
-                
+                #Imprime por pantalla la informacion especificada en text=
                 label = tk.Label(root,text="Escaneo Terminado",fg="yellow",bg="black",justify="center")
                 label.place(x=30,y=self.cont,width=530,height=20)
             except IOError:
                 self.cont=self.cont+20
+                #Imprime por pantalla la informacion especificada en text=
                 label = tk.Label(root,text="Error - No se pudo importar la libreria: Comprueba que esta este en la carpeta de wordlists",fg="red",bg="black",justify="center")
                 label.place(x=30,y=self.cont,width=530,height=20)
-                #sys.exit()
         except socket.error:
             self.cont=self.cont+20
+            #Imprime por pantalla la informacion especificada en text=
             label = tk.Label(root,text= "Error - No se pudo conectar al servidor",fg="red",bg="black",justify="center")
             label.place(x=30,y=self.cont,width=530,height=20)
             #sys.exit()
     def enumeracion(self,lista_importada,host):
+        #Esta funcion con el bucle for coge palabra a palabra y comprueba si exista dicho directorio en la pagina web
         for i in range(len(lista_importada)):
-            #try:
                 print("Probando con {}".format(lista_importada[i]))
                 respuesta = requests.get('http://' + host + '/' + lista_importada[i]).status_code
                 if respuesta == 200 :
+                    #Imprime por pantalla la informacion especificada en text=
                     label = tk.Label(root,text= "http://"+host+"/"+lista_importada[i]+": FOUND",fg="green",bg="black",justify="center")
                     label.place(x=30,y=self.cont,width=530,height=20)
                     self.cont=self.cont+20

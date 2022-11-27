@@ -232,10 +232,11 @@ class App:
         self.cont=160
 
     def GButton_797_command(self):
+        #Guardamos en una variable la url objetivo
         target = self.target.get()
+        #Iniciamos la variable que va a ir concatenando las especificaciones de la ejecucion
         filtro = " -h "+target
-        #index = self.formatoEntry.curselection()
-        #puerto = str(self.puerto.get())
+        #La serie de Ifs comprueban si se introducen las opciones y si es asi las añade a la variable
         if self.authVar.get() is not None: 
             filtro = filtro + " -id "+ self.authVar.get()
         if self.conf.get() is not None: 
@@ -255,14 +256,17 @@ class App:
             puerto = str(self.puerto.get()) 
             filtro = filtro + " -port "+ puerto
         if self.timeout.get() != "":filtro = filtro + " -timeout "+str(self.timeout.get())
-        #print("perl App/nikto/program/nikto.pl "+ filtro)
+        #Ejecutamos nikto para realizar el escaneo de vulnerabilidades bajo las especificaciones dadas
         os.system("perl App/nikto/program/nikto.pl "+ filtro + " -C all")
 
     def outputDis_command(self):
+        #Si se pulsa la checkbox para desplegar el output en la terminal se guarda
         self.outputdes = True
     def sslDis_command(self):
+        #Si se pulsa la checkbox para deshabilitar el uso de SSL se guarda
         self.sslen = True
     def no404Dis_command(self):
+        #Si pulsa la checkbox para deshabilitar los 404 checks se guarda 
         self.no404 = True
 
 if __name__ == "__main__":

