@@ -18,6 +18,7 @@ class App:
         screenheight = root.winfo_screenheight()
         alignstr = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
         root.geometry(alignstr)
+        root.configure(bg="black")
         root.resizable(width=False, height=False)
         
 
