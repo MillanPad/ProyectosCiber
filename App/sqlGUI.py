@@ -185,7 +185,10 @@ class App:
         self.lista = []
         cont=0
         #Ejecutando sqlmap para sacar las bases de datos y crear una carpeta para guardar los datos
-        os.system("sudo sqlmap -u "+target+" --dbs --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/BaseDatos")
+        if "nt" in os.name:
+            os.system("python App/SQLMAP/sqlmap -u "+target+" --dbs --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/BaseDatos")
+        else:
+            os.system("sudo sqlmap -u "+target+" --dbs --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/BaseDatos")
         #Abrimos el fichero donde se ha guardado la informacion y se despliegan las bases de datos obtenidas en la checklist
         with open('App/sqlArchives/'+self.carpeta.get()+'/BaseDatos/'+web[2]+'/log', 'r') as f:
             for line in f:
@@ -213,7 +216,10 @@ class App:
         self.lastBD = self.listBBDD.get(self.listBBDD.curselection()[0])
         cont=0
         #Ejecutando sqlmap para sacar las tablas y crear una carpeta para guardar los datos
-        os.system("sudo sqlmap -u "+target+" -D "+self.listBBDD.get(self.listBBDD.curselection()[0])+" --tables --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/Tablas")
+        if "nt" in os.name:
+            os.system("python App/SQLMAP/sqlmap.py -u "+target+" -D "+self.listBBDD.get(self.listBBDD.curselection()[0])+" --tables --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/Tablas")
+        else:
+            os.system("sudo sqlmap -u "+target+" -D "+self.listBBDD.get(self.listBBDD.curselection()[0])+" --tables --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/Tablas")
         #Abrimos el fichero donde se ha guardado la informacion y se despliegan las tablas obtenidas en la checklist
         with open('App/sqlArchives/'+self.carpeta.get()+'/Tablas/'+web[2]+'/log', 'r') as f:
             for line in f:
@@ -236,7 +242,10 @@ class App:
         self.lista = []
         cont=0
         #Ejecutando sqlmap para sacar las columnas y crear una carpeta para guardar los datos
-        os.system("sudo sqlmap -u "+target+" -D "+self.lastBD+" -T "+self.listTable.get(self.listTable.curselection()[0])+" --columns --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/Columnas")
+        if "nt" in os.name:
+            os.system("python App/SQLMAP/sqlmap.py -u "+target+" -D "+self.lastBD+" -T "+self.listTable.get(self.listTable.curselection()[0])+" --columns --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/Columnas")
+        else:
+            os.system("sudo sqlmap -u "+target+" -D "+self.lastBD+" -T "+self.listTable.get(self.listTable.curselection()[0])+" --columns --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/Columnas")
         #Abrimos el fichero donde se ha guardado la informacion y se despliegan las columnas obtenidas en la checklist
         with open('App/sqlArchives/'+self.carpeta.get()+'/Columnas/'+web[2]+'/log', 'r') as f:
             for line in f:
@@ -259,7 +268,10 @@ class App:
         web = target.split("/")
         cont=0
         #Ejecutando sqlmap para sacar las contraseñas y crear una carpeta para guardar los datos
-        os.system("sudo sqlmap -u "+target+" --passwords --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/Passwd")
+        if "nt" in os.name:
+            os.system("python App/SQLMAP/sqlmap.py -u "+target+" --passwords --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/Passwd")
+        else:
+            os.system("sudo sqlmap -u "+target+" --passwords --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/Passwd")
         #Abrimos el fichero donde se ha guardado la informacion y se despliegan las contraseñas obtenidas en la checklist
         with open('App/sqlArchives/'+self.carpeta.get()+'/Passwd/'+web[2]+'/log', 'r') as f:
             for line in f:
@@ -287,7 +299,10 @@ class App:
         web = target.split("/")
         cont=0
         #Ejecutando sqlmap para sacar los usuarios y crear una carpeta para guardar los datos
-        os.system("sudo sqlmap -u "+target+" --users --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/User")
+        if "nt" in os.name:
+            os.system("python App/SQLMAP/sqlmap.py -u "+target+" --users --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/User")
+        else:
+            os.system("sudo sqlmap -u "+target+" --users --batch --output-dir=App/sqlArchives/"+self.carpeta.get()+"/User")
         #Abrimos el fichero donde se ha guardado la informacion y se despliegan los usuarios obtenidos en la checklist
         with open('App/sqlArchives/'+self.carpeta.get()+'/User/'+web[2]+'/log', 'r') as f:
             for line in f:

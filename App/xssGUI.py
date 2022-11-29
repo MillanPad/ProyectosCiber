@@ -138,15 +138,22 @@ class App:
         filtro = "-u " + url
         line1 =""
         #Eliminamos el archivo xss.txt que contiene el output de la anterior ejecucion
-        os.system("sudo rm xss.txt")
+        if "nt" in os.name:
+            os.remove('xss.txt')
+        #Si el sistema operativo es linux usamos otro comando
+        else:
+            os.system("sudo rm xss.txt")
         #Si se introducen las opciones se añaden a la variable filtro que especifica la ejecucion
         if self.GListBox_146.curselection() is not None:
             index = self.GListBox_146.curselection()
             filtro = filtro + " --method "+str(index[0])
         if self.payload.get() != "":
             filtro = filtro + " --payload "+ self.payload.get()+ ""
-        #Se ejecuta pwnxss que realizara el ataque
-        os.system("sudo python App/PwnXSS/pwnxss.py "+filtro)
+        #Se ejecuta pwnxss que realizara el ataque con una sentencia distinta dependiendo del sistema operativo
+        if "nt" in os.name:
+            os.system("python App/PwnXSS/pwnxss.py "+filtro)
+        else:
+            os.system("sudo python App/PwnXSS/pwnxss.py "+filtro)
         
         cont=0
         #Escribimos en la ventana el output que se guarda en el archivo xss.txt que se crea al ejecutarse
