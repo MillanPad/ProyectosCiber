@@ -230,7 +230,7 @@ class App:
         GButton_797["text"] = "Empezar"
         GButton_797.place(x=578,y=280,width=122,height=30)
         GButton_797["command"] = self.GButton_797_command
-        self.cont=160
+        
 
     def GButton_797_command(self):
         #Guardamos en una variable la url objetivo
@@ -259,6 +259,8 @@ class App:
         if self.timeout.get() != "":filtro = filtro + " -timeout "+str(self.timeout.get())
         #Ejecutamos nikto para realizar el escaneo de vulnerabilidades bajo las especificaciones dadas
         os.system("perl App/nikto/program/nikto.pl "+ filtro + " -C all")
+        label = tk.Label(root,text="Escaneo Completado",fg="yellow",bg="black",justify="center")
+        label.place(x=170,y=330,width=530,height=20)
 
     def outputDis_command(self):
         #Si se pulsa la checkbox para desplegar el output en la terminal se guarda
